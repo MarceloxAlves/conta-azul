@@ -5,7 +5,7 @@ require_once 'CurlService.php';
 class ContaAzulService
 {
     const URL = "https://api.contaazul.com/";
-    const CLIENT_ID = "";
+    const CLIENT_ID = "5Ky95Cd53KtlSPSRIposSwnlsm5QnsPd ";
 
     function getToken($url_redirect = "")
     {
