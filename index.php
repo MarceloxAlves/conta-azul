@@ -9,4 +9,6 @@ require_once 'ContaAzulService.php';
 
 $contaAzul = new ContaAzulService();
 
-$contaAzul->auth("http://avantitecnologias.com.br/conta-azul/");
+if ($_GET['code']){
+    $_SESSION['token_conta_azul'] = $_GET['code'];
+}
