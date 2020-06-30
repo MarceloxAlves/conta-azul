@@ -10,8 +10,8 @@ class ContaAzulService
     function getToken($url_redirect = "")
     {
         $endpoint = self::URL . "auth/authorize?redirect_uri={$url_redirect}&client_id=" . self::CLIENT_ID . "&scope=sales&state=" . self::csrf();
-        $result = CurlService::get($endpoint);
-        return $result;
+       // $result = CurlService::get($endpoint);
+        return $endpoint;
     }
 
     static function csrf()
