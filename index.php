@@ -9,4 +9,4 @@ require_once 'ContaAzulService.php';
 
 $contaAzul = new ContaAzulService();
 
-dd($contaAzul->getToken("http://avantitecnologias.com.br/conta-azul/"));
+$contaAzul->auth("http://avantitecnologias.com.br/conta-azul/");

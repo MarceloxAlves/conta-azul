@@ -7,11 +7,10 @@ class ContaAzulService
     const URL = "https://api.contaazul.com/";
     const CLIENT_ID = "5Ky95Cd53KtlSPSRIposSwnlsm5QnsPd";
 
-    function getToken($url_redirect = "")
+    function auth($url_redirect = "", $scope = 'sales')
     {
-        $endpoint = self::URL . "auth/authorize?redirect_uri={$url_redirect}&client_id=" . self::CLIENT_ID . "&scope=sales&state=" . self::csrf();
-       // $result = CurlService::get($endpoint);
-        return $endpoint;
+        $endpoint = self::URL . "auth/authorize?redirect_uri={$url_redirect}&client_id=" . self::CLIENT_ID . "&scope={$scope}&state=" . self::csrf();
+        header('Location: ' . $endpoint);
     }
 
     static function csrf()
