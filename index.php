@@ -9,4 +9,4 @@ require_once 'ContaAzulService.php';
 
 $contaAzul = new ContaAzulService();
 
-var_dump($contaAzul->getToken("http://localhost:8000"));
+dd($contaAzul->getToken("http://avantitecnologias.com.br/conta-azul/"));
