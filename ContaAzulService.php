@@ -19,7 +19,7 @@ class ContaAzulService
     {
         $endpoint = self::URL . "oauth2/token";
         $data = [
-            "grant_type" => "authentication_code",
+            "grant_type" => "authorization_code",
             "redirect_uri" => self::REDIRECT_URI,
             "code" => $code,
         ];
