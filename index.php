@@ -86,7 +86,8 @@ where paciente != '0' and idExclusao is not null");
                 $sale["shipping_cost"] = $total;
             }
 
-            $contaAzul->createSale($sale);
+           $result =  $contaAzul->createSale($sale);
+            dd($result);
         }
     }
 } else {
