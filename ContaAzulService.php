@@ -62,7 +62,7 @@ class ContaAzulService
         $header = [
             "Authorization: Bearer " . $_SESSION['access_token']
         ];
-        $endpoint = self::URL . "v1/sales/";
+        $endpoint = self::URL . "v1/sales";
         return CurlService::post($endpoint, $sale, $header, false);
     }
 
