@@ -85,7 +85,7 @@ where paciente != '0' and idExclusao is not null");
 
                 $sale["shipping_cost"] = $total;
             }
-            echo $sale;
+            dd($sale);
            $result =  $contaAzul->createSale($sale);
         }
     }
