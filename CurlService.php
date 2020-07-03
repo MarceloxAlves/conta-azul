@@ -39,8 +39,6 @@ class CurlService
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_URL, $url);
         $object = curl_exec($ch);
-        var_dump($object, $url);
-
 
         if ($object === false) {
             throw new \Exception('Curl error: ' . curl_error($ch));
