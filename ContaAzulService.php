@@ -28,14 +28,17 @@ class ContaAzulService
             "Authorization: Basic $authorization"
         ];
 
-        $endpoint .= "?". http_build_query($data);
+        $endpoint .= "?" . http_build_query($data);
         return CurlService::post($endpoint, [], $header);
     }
 
     function createSale($sale)
     {
+        $header = [
+            "Authorization: Bearer " . $_SESSION['access_token']
+        ];
         $endpoint = self::URL . "v1/sales/";
-        CurlService::post($endpoint, $sale);
+        CurlService::post($endpoint, $sale, $header);
     }
 
 

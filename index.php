@@ -17,11 +17,14 @@ if ($_GET['code']) {
 
 if (isset($_SESSION['token_conta_azul'])) {
     echo "Logado";
-
     $token =  $contaAzul->getToken($_SESSION['token_conta_azul']);
-    dd($token);
-
-    if ($_SESSION['token']) {
+    if (isset($token->access_token)){
+        $_SESSION['access_token'] = $token->access_token;
+    }
+    if (isset($token->refresh_token)){
+        $_SESSION['refresh_token'] = $token->refresh_token;
+    }
+    if ($_SESSION['access_token']) {
         $applications = Conexao::readSQL("select * from aplicacao app 
 where paciente != '0' and idExclusao is not null");
         $pacienteArray = array();
