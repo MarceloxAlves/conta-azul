@@ -60,6 +60,7 @@ class ContaAzulService
     function createSale($sale)
     {
         $header = [
+            'Content-Type: application/json',
             "Authorization: Bearer " . $_SESSION['access_token']
         ];
         $endpoint = self::URL . "v1/sales";
