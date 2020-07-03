@@ -40,7 +40,7 @@ class CurlService
         curl_setopt($ch, CURLOPT_URL, $url);
         $object = curl_exec($ch);
 
-
+        dd($object);
         if ($object === false) {
             throw new \Exception('Curl error: ' . curl_error($ch));
         }
