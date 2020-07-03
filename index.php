@@ -27,6 +27,7 @@ if (isset($_SESSION['token_conta_azul'])) {
         }
     }
     if ($_SESSION['access_token']) {
+        dd("sadada");
         $applications = Conexao::readSQL("select * from aplicacao app 
 where paciente != '0' and idExclusao is not null");
         $pacienteArray = array();
