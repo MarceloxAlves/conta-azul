@@ -27,7 +27,9 @@ class ContaAzulService
         $header = [
             "Authorization: Basic $authorization"
         ];
-        return CurlService::post($endpoint, $data, $header);
+
+        $endpoint .= "?". http_build_query($data);
+        return CurlService::post($endpoint, [], $header);
     }
 
     function createSale($sale)
