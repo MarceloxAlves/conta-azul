@@ -13,6 +13,13 @@ class ContaAzulService
         header('Location: ' . $endpoint);
     }
 
+    function createSale($sale)
+    {
+        $endpoint = self::URL . "v1/sales/";
+        CurlService::post($endpoint, $sale);
+    }
+
+
     static function csrf()
     {
         if (function_exists('mcrypt_create_iv'))
