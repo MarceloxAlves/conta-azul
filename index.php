@@ -25,6 +25,7 @@ try {
         if ($_SESSION['access_token']) {
             $token = $contaAzul->refreshToken();
             $contaAzul->saveSessions($token);
+            var_dump($_SESSION['access_token']);
             $applications = Conexao::readSQL("select * from aplicacao app 
 where paciente != '0' and idExclusao is not null");
             $pacienteArray = array();
