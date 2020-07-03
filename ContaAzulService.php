@@ -32,6 +32,31 @@ class ContaAzulService
         return CurlService::post($endpoint, [], $header);
     }
 
+    function refreshToken()
+    {
+        $endpoint = self::URL . "oauth2/token";
+        $data = [
+            "grant_type" => "refresh_token",
+            "refresh_token" => $_SESSION['refresh_token'],
+        ];
+        $authorization = base64_encode(self::CLIENT_ID . ":" . self::CLIENT_SECRET); // Prepare the authorisation token
+        $header = [
+            "Authorization: Basic $authorization"
+        ];
+
+        $endpoint .= "?" . http_build_query($data);
+        return CurlService::post($endpoint, [], $header);
+    }
+
+    function saveSessions($token){
+        if (isset($token->access_token)) {
+            $_SESSION['access_token'] = $token->access_token;
+        }
+        if (isset($token->refresh_token)) {
+            $_SESSION['refresh_token'] = $token->refresh_token;
+        }
+    }
+
     function createSale($sale)
     {
         $header = [

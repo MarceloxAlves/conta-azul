@@ -19,15 +19,12 @@ if (isset($_SESSION['token_conta_azul'])) {
     echo "Logado";
     if (!$_SESSION['access_token']) {
         $token = $contaAzul->getToken($_SESSION['token_conta_azul']);
-        if (isset($token->access_token)) {
-            $_SESSION['access_token'] = $token->access_token;
-        }
-        if (isset($token->refresh_token)) {
-            $_SESSION['refresh_token'] = $token->refresh_token;
-        }
+        $contaAzul->saveSessions($token);
+
     }
     if ($_SESSION['access_token']) {
-        dd("sadada");
+        $token = $contaAzul->refreshToken();
+        $contaAzul->saveSessions($token);
         $applications = Conexao::readSQL("select * from aplicacao app 
 where paciente != '0' and idExclusao is not null");
         $pacienteArray = array();
