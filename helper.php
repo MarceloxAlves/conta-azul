@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('America/Bahia');
 function dd($param)
 {
     var_dump($param);
@@ -7,6 +6,7 @@ function dd($param)
 }
 
 function dateContaAzul($date){
-    $date = new DateTime($date);
-    return $date->format('Y-m-d\TH:i:s.u');
+    $dateTime = new DateTime($date);
+    $dateTime->setTimezone(new DateTimeZone('America/New_York'));
+    return $dateTime->format('Y-m-d\TH:i:s.u');
 }
