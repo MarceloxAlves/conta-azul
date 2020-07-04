@@ -20,8 +20,10 @@ if ($_SESSION['access_token']) {
             'person_type' => "NATURAL",
             'document' => "". $paciente['cpf'],
             'identity_document' => "".$paciente['codigo'],
+            'date_of_birth' => dateContaAzul($paciente['dtnascimento']),
         ];
-
+        var_dump($customer);
+        echo "</br></br>";
 
         $customer = $contaAzul->createCustomer($customer);
         var_dump($customer);
