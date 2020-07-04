@@ -16,10 +16,10 @@ if ($_SESSION['access_token']) {
         $customer = [
             'name' => $paciente['nome'],
             'email' => "" . $paciente['email'],
-            'notes' => $paciente['observacao'],
+            'notes' => "" .$paciente['observacao'],
             'person_type' => "NATURAL",
-            'document' => $paciente['cpf'],
-            'identity_document' => $paciente['codigo'],
+            'document' => "". $paciente['cpf'],
+            'identity_document' => "".$paciente['codigo'],
             'date_of_birth' => dateContaAzul($paciente['dtnascimento']),
         ];
 
