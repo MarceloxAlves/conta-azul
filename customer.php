@@ -1,5 +1,6 @@
 <?php
 session_start();
+ini_set('display_errors', 1);
 require_once 'helper.php';
 require_once 'Conexao.php';
 require_once 'ContaAzulService.php';
@@ -14,7 +15,7 @@ if ($_SESSION['access_token']) {
     foreach ($pacientes as $paciente) {
         $customer = [
             'name' => $paciente['nome'],
-            'email' => "".$paciente['email'],
+            'email' => "" . $paciente['email'],
             'notes' => $paciente['observacao'],
             'person_type' => "NATURAL",
             'document' => $paciente['cpf'],
@@ -22,14 +23,12 @@ if ($_SESSION['access_token']) {
             'date_of_birth' => dateContaAzul($paciente['dtnascimento']),
         ];
 
-        var_dump($customer);
-        echo "</br></br>";
 
         $customer = $contaAzul->createCustomer($customer);
         var_dump($customer);
         echo "</br></br>";
 
-        Conexao::update('paciente',["conta_azul_id"=>$customer->id], "WHERE codigo = :codigo", "codigo=".$paciente["codigo"]);
+        Conexao::update('paciente', ["conta_azul_id" => $customer->id], "WHERE codigo = :codigo", "codigo=" . $paciente["codigo"]);
 
 
     }
