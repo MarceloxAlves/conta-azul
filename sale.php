@@ -9,7 +9,7 @@ require_once 'ContaAzulService.php';
     <button type="submit" name="period">Enviar para o conta azul</button>
 </form>
 <?php
-if ($_SESSION['access_token'] && $_POST['period']) {
+if ($_SESSION['access_token'] && isset($_POST['period'])) {
 
     $dataIni =  $_POST['date_start'];
     $dataFin =  $_POST['date_end'];
