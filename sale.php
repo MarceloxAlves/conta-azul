@@ -3,8 +3,14 @@ session_start();
 require_once 'helper.php';
 require_once 'Conexao.php';
 require_once 'ContaAzulService.php';
-
-if ($_SESSION['access_token']) {
+?>
+<form action="" method="post">
+    De <input type="date" name="date_start"> até <input type="date" name="date_end">
+    <br>
+    <button type="submit">Enviar para o conta sale</button>
+</form>
+<?php
+if ($_SESSION['access_token'] && $_POST['period']) {
     $contaAzul = new ContaAzulService();
     $token = $contaAzul->refreshToken();
     $contaAzul->saveSessions($token);
@@ -73,3 +79,4 @@ where paciente != '0' and idExclusao is not null");
         var_dump($result);
     }
 }
+?>
