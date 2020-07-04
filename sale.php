@@ -31,7 +31,7 @@ where app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '"
     foreach ($pacienteArray as $key => $paciente) {
         $sale = array(
             'number' => $application['idExclusao'],
-            'emission' => date('Y-m-dTH:i:sZ'),
+            'emission' => dateContaAzul(date('Y-m-d')),
             'status' => 'COMMITTED',
             'customer_id' => $key,
             'products' => array(),
@@ -67,7 +67,7 @@ where app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '"
                 $total += $receita["valor"];
                 $sale["payment"]["installments"][] = [
                     "number" => ++$parcela,
-                    "due_date" => $receita['data_venc'],
+                    "due_date" => dateContaAzul($receita['data_venc']),
                     "value" => $receita['valor'],
                 ];
             }
@@ -79,6 +79,13 @@ where app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '"
 
             $sale["shipping_cost"] = $total;
         }
+
+        var_dump($sale);
+        echo "</br></br>";
+
+
+
+
         $result = $contaAzul->createSale($sale);
         var_dump($result);
     }

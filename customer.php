@@ -24,8 +24,6 @@ if ($_SESSION['access_token']) {
         ];
 
         $customer = $contaAzul->createCustomer($customer);
-        var_dump($customer);
-        echo "</br></br>";
 
         if (!$customer){
            echo  "Não migrou: ". $paciente["nome"]." CPF: ".$paciente["cpf"];
