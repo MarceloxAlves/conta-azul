@@ -6,16 +6,23 @@ require_once 'ContaAzulService.php';
 ?>
 <form action="" method="post">
     De <input type="date" name="date_start"> até <input type="date" name="date_end">
-    <button type="submit">Enviar para o conta azul</button>
+    <button type="submit" name="period">Enviar para o conta azul</button>
 </form>
 <?php
 if ($_SESSION['access_token'] && $_POST['period']) {
+
+    $dataIni =  $_POST['date_start'];
+    $dataFin =  $_POST['date_end'];
+
+    dd($dataIni);
+
+
     $contaAzul = new ContaAzulService();
     $token = $contaAzul->refreshToken();
     $contaAzul->saveSessions($token);
     var_dump($_SESSION['access_token']);
-    $applications = Conexao::readSQL("select * from aplicacao app 
-where paciente != '0' and idExclusao is not null");
+    $applications = Conexao::readSQL("select app.* from aplicacao app  join receitas rc on app.idExclusao == rc.idExclusao
+where app.paciente != '0' and app.idExclusao is not null  and ");
     $pacienteArray = array();
     foreach ($applications as $application) {
         $paciente = $application['paciente'];
