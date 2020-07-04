@@ -13,19 +13,17 @@ if ($_SESSION['access_token']) {
     $vacinas = Conexao::readSQL("select * from vacina where conta_azul_id is null");
     foreach ($vacinas as $vacina) {
 
-        dd($vacina);
-
         $product = [
             'name' => $vacina['nome'],
             'value' => $vacina['valor'],
             'cost' => $vacina['valor'],
-            "code" => $vacina["id"],
+            "code" => $vacina["codigo"],
             "available_stock" => 10000,
         ];
 
         $product = $contaAzul->createProduct($product);
 
-        Conexao::update('vacina',["conta_azul_id"=>$product->id], "WHERE id = ".$vacina["id"]);
+        Conexao::update('vacina',["conta_azul_id"=>$product->id], "WHERE codigo = :codigo", "codigo=".$vacina["codigo"]);
 
 
     }
