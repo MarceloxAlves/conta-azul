@@ -10,7 +10,7 @@ if ($_SESSION['access_token']) {
     $contaAzul->saveSessions($token);
     var_dump($_SESSION['access_token']);
 
-    $vacinas = Conexao::readSQL("select * from vacinas where conta_azul_id is null");
+    $vacinas = Conexao::readSQL("select * from vacina where conta_azul_id is null");
     foreach ($vacinas as $vacina) {
 
         $product = [
@@ -23,7 +23,7 @@ if ($_SESSION['access_token']) {
 
         $product = $contaAzul->createProduct($product);
 
-        Conexao::update('vacinas',["conta_azul_id"=>$product->id], "WHERE id = ".$vacina["id"]);
+        Conexao::update('vacina',["conta_azul_id"=>$product->id], "WHERE id = ".$vacina["id"]);
 
 
     }

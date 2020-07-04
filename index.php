@@ -16,7 +16,7 @@ try {
             $contaAzul->saveSessions($token);
         }
 
-        echo "<a href='./prodcut.php'>Integrar Vacinas</a> | <a href='./customer.php'>Ingtegrar Pacientes</a> | <a href='./sale.php'>Integrar Vendas </a>";
+        echo "<a href='./product.php'>Integrar Vacinas</a> | <a href='./customer.php'>Ingtegrar Pacientes</a> | <a href='./sale.php'>Integrar Vendas </a>";
 
     } else {
         echo "<a href='./login.php'>Solicitar Permissão Conta Azul</a>";
