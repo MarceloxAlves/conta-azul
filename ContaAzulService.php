@@ -74,9 +74,19 @@ class ContaAzulService
         return CurlService::post($endpoint, $product, $header, true);
     }
 
+    public function createCustomer($customer)
+    {
+        $header = [
+            'Content-Type: application/json',
+            "Authorization: Bearer " . $_SESSION['access_token']
+        ];
+        $endpoint = self::URL . "v1/customers";
+        return CurlService::post($endpoint, $customer, $header, true);
+    }
+
     /**
      * Cria um venda no conta azul - sale é um array no formato do payload do contaazul
-     * https://developers.contaazul.com/#!/Sale/create
+     * @link https://developers.contaazul.com/#!/Sale/create
      * @param $sale
      * @return bool|mixed|string
      * @throws Exception
@@ -97,6 +107,8 @@ class ContaAzulService
             return bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
         return bin2hex(openssl_random_pseudo_bytes(32));
     }
+
+
 
 
 }
