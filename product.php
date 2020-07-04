@@ -23,6 +23,10 @@ if ($_SESSION['access_token']) {
 
         $product = $contaAzul->createProduct($product);
 
+        var_dump($product);
+        echo "</br></br>";
+
+
         Conexao::update('vacina',["conta_azul_id"=>$product->id], "WHERE codigo = :codigo", "codigo=".$vacina["codigo"]);
 
 

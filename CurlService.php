@@ -40,11 +40,12 @@ class CurlService
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_FAILONERROR, true);
         $object = curl_exec($ch);
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        var_dump($object);
-
-        if (!$object) {
-            throw new \Exception('Curl error: ' . curl_error($ch));
+        if ($object === false) {
+            var_dump('Error: (' . $http_status . ') ' . curl_error($ch));
+            echo "</br></br>";
+            return null;
         }
         if ($decode)
             $object = json_decode($object);
