@@ -8,5 +8,5 @@ function dd($param)
 
 function dateContaAzul($date, $format='Y-m-d'){
     $dateTime = \DateTime::createFromFormat($format, $date);
-    return $dateTime->format('Y-m-d\TH:i:s.P');
+    return $dateTime->format('Y-m-d\TH:i:s.z-05');
 }
