@@ -19,8 +19,10 @@ if ($_SESSION['access_token'] && isset($_POST['period'])) {
     $token = $contaAzul->refreshToken();
     $contaAzul->saveSessions($token);
     var_dump($_SESSION['access_token']);
-    $applications = Conexao::readSQL("select app.* from aplicacao app  join receitas rc on app.idExclusao = rc.idExclusao
-where app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '".$dataIni."' and rc.data_pagto <= '".$dataFin."'");
+    $applications = Conexao::readSQL("select app.*,  pc.conta_azul_id from aplicacao app 
+ join receitas rc on app.idExclusao = rc.idExclusao
+ join paciente pc on app.paciente = pc.codigo
+where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '".$dataIni."' and rc.data_pagto <= '".$dataFin."'");
     $pacienteArray = array();
     foreach ($applications as $application) {
         $paciente = $application['paciente'];
@@ -33,7 +35,7 @@ where app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '"
             'number' => $application['idExclusao'],
             'emission' => dateContaAzul(date('Y-m-d')),
             'status' => 'COMMITTED',
-            'customer_id' => $key,
+            'customer_id' => $application['conta_azul_id'],
             'products' => array(),
             'discount' => array(),
             'payment' =>
