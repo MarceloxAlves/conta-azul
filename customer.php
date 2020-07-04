@@ -15,7 +15,7 @@ if ($_SESSION['access_token']) {
     foreach ($pacientes as $paciente) {
         $customer = [
             'name' => $paciente['nome'],
-            'email' => "" . $paciente['email'],
+            'email' => $paciente['email'] ? $paciente['email'] : "sememail@gmail.com",
             'notes' => "" .$paciente['observacao'],
             'person_type' => "NATURAL",
             'document' => "". $paciente['cpf'],
