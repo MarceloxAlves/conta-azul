@@ -49,6 +49,11 @@ class CurlService
             echo "</br></br>";
             return null;
         }
+        if ($http_status == 400 || $http_status == 422){
+            var_dump('Dados inválidos: ' . $object);
+            echo "</br></br>";
+            return null;
+        }
         if ($decode)
             $object = json_decode($object);
 
