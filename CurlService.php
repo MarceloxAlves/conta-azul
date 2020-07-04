@@ -50,8 +50,6 @@ class CurlService
             return null;
         }
 
-        var_dump($object);
-
         if ($decode)
             $object = json_decode($object);
 

@@ -14,13 +14,16 @@ if ($_SESSION['access_token']) {
     foreach ($pacientes as $paciente) {
         $customer = [
             'name' => $paciente['nome'],
-            'email' => $paciente['email'],
+            'email' => "".$paciente['email'],
             'notes' => $paciente['observacao'],
             'person_type' => "NATURAL",
             'document' => $paciente['cpf'],
             'identity_document' => $paciente['codigo'],
             'date_of_birth' => dateContaAzul($paciente['dtnascimento']),
         ];
+
+        var_dump($customer);
+        echo "</br></br>";
 
         $customer = $contaAzul->createCustomer($customer);
         var_dump($customer);
