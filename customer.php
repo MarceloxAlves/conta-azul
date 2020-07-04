@@ -18,6 +18,7 @@ if ($_SESSION['access_token']) {
             'notes' => $paciente['observacao'],
             'person_type' => "NATURAL",
             'document' => $paciente['cpf'],
+            'identity_document' => $paciente['codigo'],
             'date_of_birth' => dateContaAzul($paciente['dtnascimento']),
         ];
 
