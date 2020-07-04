@@ -13,6 +13,8 @@ if ($_SESSION['access_token']) {
     $vacinas = Conexao::readSQL("select * from vacina where conta_azul_id is null");
     foreach ($vacinas as $vacina) {
 
+        dd($vacina);
+
         $product = [
             'name' => $vacina['nome'],
             'value' => $vacina['valor'],
