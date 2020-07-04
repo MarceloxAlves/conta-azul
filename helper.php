@@ -6,7 +6,7 @@ function dd($param)
 }
 
 function dateContaAzul($date){
-    $dateTime = new DateTime($date);
+    $dateTime = new DateTime($date." H:i:s");
     $dateTime->setTimezone(new DateTimeZone('America/New_York'));
     return $dateTime->format('Y-m-d\TH:i:s.u');
 }
