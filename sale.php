@@ -6,8 +6,7 @@ require_once 'ContaAzulService.php';
 ?>
 <form action="" method="post">
     De <input type="date" name="date_start"> até <input type="date" name="date_end">
-    <br>
-    <button type="submit">Enviar para o conta sale</button>
+    <button type="submit">Enviar para o conta azul</button>
 </form>
 <?php
 if ($_SESSION['access_token'] && $_POST['period']) {
