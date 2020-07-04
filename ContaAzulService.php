@@ -57,6 +57,30 @@ class ContaAzulService
         }
     }
 
+    /**
+     * Cria um produto no conta azul - Produto é um array no formato do payload do contaazul
+     * https://developers.contaazul.com/#!/Product/create
+     * @param  $product
+     * @return bool|mixed|string
+     * @throws Exception
+     */
+    function createProduct($product)
+    {
+        $header = [
+            'Content-Type: application/json',
+            "Authorization: Bearer " . $_SESSION['access_token']
+        ];
+        $endpoint = self::URL . "v1/products";
+        return CurlService::post($endpoint, $product, $header, true);
+    }
+
+    /**
+     * Cria um venda no conta azul - sale é um array no formato do payload do contaazul
+     * https://developers.contaazul.com/#!/Sale/create
+     * @param $sale
+     * @return bool|mixed|string
+     * @throws Exception
+     */
     function createSale($sale)
     {
         $header = [
@@ -66,7 +90,6 @@ class ContaAzulService
         $endpoint = self::URL . "v1/sales";
         return CurlService::post($endpoint, $sale, $header, false);
     }
-
 
     static function csrf()
     {
