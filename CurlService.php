@@ -2,7 +2,7 @@
 
 class CurlService
 {
-    public static function get($url, $dados = [], $decode = true)
+    public static function get($url,  $decode = true)
     {
 
         $url = str_replace(' ', '%20', $url);
@@ -39,6 +39,8 @@ class CurlService
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, json_encode($dados));
+
         $object = curl_exec($ch);
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
