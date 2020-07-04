@@ -43,9 +43,11 @@ class CurlService
 
         $object = curl_exec($ch);
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 
         if ($object === false) {
-            var_dump('Error: (' . $http_status . ') ' . curl_error($ch). $object);
+            var_dump('Error: (' . $http_status . ') ' . curl_error($ch)
+            );
             echo "</br></br>";
             return null;
         }

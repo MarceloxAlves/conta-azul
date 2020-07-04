@@ -22,15 +22,17 @@ if ($_SESSION['access_token']) {
             'identity_document' => "".$paciente['codigo'],
             'date_of_birth' => dateContaAzul($paciente['dtnascimento']),
         ];
-        var_dump($customer);
-        echo "</br></br>";
 
         $customer = $contaAzul->createCustomer($customer);
         var_dump($customer);
         echo "</br></br>";
 
-        Conexao::update('paciente', ["conta_azul_id" => $customer->id], "WHERE codigo = :codigo", "codigo=" . $paciente["codigo"]);
+        if (!$customer){
+           echo  "Não migrou: ". $paciente["nome"]." CPF: ".$paciente["cpf"];
+        }else {
 
+            Conexao::update('paciente', ["conta_azul_id" => $customer->id], "WHERE codigo = :codigo", "codigo=" . $paciente["codigo"]);
+        }
 
     }
 }
