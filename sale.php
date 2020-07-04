@@ -14,15 +14,13 @@ if ($_SESSION['access_token'] && isset($_POST['period'])) {
     $dataIni =  $_POST['date_start'];
     $dataFin =  $_POST['date_end'];
 
-    dd($dataIni);
-
 
     $contaAzul = new ContaAzulService();
     $token = $contaAzul->refreshToken();
     $contaAzul->saveSessions($token);
     var_dump($_SESSION['access_token']);
     $applications = Conexao::readSQL("select app.* from aplicacao app  join receitas rc on app.idExclusao == rc.idExclusao
-where app.paciente != '0' and app.idExclusao is not null  and ");
+where app.paciente != '0' and app.idExclusao is not null  and rc.data_pagto >= ".$dataIni . " and rc.data_pagto <= ".$dataFin);
     $pacienteArray = array();
     foreach ($applications as $application) {
         $paciente = $application['paciente'];
