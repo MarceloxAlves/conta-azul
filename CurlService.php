@@ -45,7 +45,7 @@ class CurlService
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if ($object === false) {
-            var_dump('Error: (' . $http_status . ') ' . curl_error($ch));
+            var_dump('Error: (' . $http_status . ') ' . curl_error($ch). $object);
             echo "</br></br>";
             return null;
         }
