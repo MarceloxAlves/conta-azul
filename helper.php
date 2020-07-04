@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Bahia');
 function dd($param)
 {
     var_dump($param);
