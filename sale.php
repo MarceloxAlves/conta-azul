@@ -11,8 +11,8 @@ require_once 'ContaAzulService.php';
 <?php
 if ($_SESSION['access_token'] && isset($_POST['period'])) {
 
-    $dataIni =  $_POST['date_start'];
-    $dataFin =  $_POST['date_end'];
+    $dataIni = $_POST['date_start'];
+    $dataFin = $_POST['date_end'];
 
 
     $contaAzul = new ContaAzulService();
@@ -22,7 +22,7 @@ if ($_SESSION['access_token'] && isset($_POST['period'])) {
     $applications = Conexao::readSQL("select app.*,  pc.conta_azul_id from aplicacao app 
  join receitas rc on app.idExclusao = rc.idExclusao
  join paciente pc on app.paciente = pc.codigo
-where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '".$dataIni."' and rc.data_pagto <= '".$dataFin."'");
+where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '" . $dataIni . "' and rc.data_pagto <= '" . $dataFin . "'");
     $pacienteArray = array();
     foreach ($applications as $application) {
         $paciente = $application['paciente'];
@@ -50,7 +50,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
         foreach ($paciente as $keyIdExclusao => $idExclusao) {
 
             foreach ($idExclusao as $product) {
-                $vacina = Conexao::readSQL("select * from vacina where codigo =  ".$product["vacina"])[0];
+                $vacina = Conexao::readSQL("select * from vacina where codigo =  " . $product["vacina"])[0];
                 $sale["products"][] = [
                     "quantity" => $product["dose"],
                     "product_id" => $vacina["conta_azul_id"],
@@ -72,7 +72,8 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
                         "value" => $receita['valor'],
                     ];
                 }
-            }
+            } else
+                continue;
 
             $sale["discount"] = [
                 "measure_unit" => "VALUE",
@@ -84,8 +85,6 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
 
         var_dump($sale);
         echo "</br></br>";
-
-
 
 
         $result = $contaAzul->createSale($sale);
