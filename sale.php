@@ -58,14 +58,14 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
                 ];
             }
 
-            $receitas = Conexao::readSQL("select * from receitas rc where idExclusao = '$keyIdExclusao'");
+            $receitas = Conexao::readSQL("select * from receitas rc where idExclusao = '$keyIdExclusao' and agente = '$keyIdExclusao' ");
             if (count($receitas) > 1) {
                 $sale["payment"]["type"] = "TIMES";
             }
 
             $desconto = 0;
 
-            /*foreach ($receitas as $parcela => $receita) {
+            foreach ($receitas as $parcela => $receita) {
                 $desconto += $receita["desconto"];
                 $total += $receita["valor"];
                 $sale["payment"]["installments"][] = [
@@ -73,7 +73,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
                     "due_date" => dateContaAzul($receita['data_venc']),
                     "value" => $receita['valor'],
                 ];
-            }*/
+            }
 
             $sale["discount"] = [
                 "measure_unit" => "VALUE",
@@ -85,6 +85,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
 
         var_dump($sale);
         echo "</br></br>";
+
 
 
 
