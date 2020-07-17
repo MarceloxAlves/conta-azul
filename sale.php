@@ -58,7 +58,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
                 ];
             }
 
-            $receitas = Conexao::readSQL("select * from receitas rc where idExclusao = '$keyIdExclusao' and agente = '$keyIdExclusao' ");
+           /* $receitas = Conexao::readSQL("select * from receitas rc where idExclusao = '$keyIdExclusao' and agente = '$keyIdExclusao' ");
             if (count($receitas) > 1) {
                 $sale["payment"]["type"] = "TIMES";
             }
@@ -78,7 +78,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
             $sale["discount"] = [
                 "measure_unit" => "VALUE",
                 "rate" => $desconto,
-            ];
+            ];*/
 
             $sale["shipping_cost"] = $total;
         }
