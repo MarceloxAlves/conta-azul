@@ -41,7 +41,6 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
             'payment' =>
                 array(
                     'type' => 'CASH',
-                    'installments' => array(),
                 ),
             'notes' => '',
             'shipping_cost' => 0,
