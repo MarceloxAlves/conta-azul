@@ -50,7 +50,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
         foreach ($paciente as $keyIdExclusao => $idExclusao) {
 
             foreach ($idExclusao as $product) {
-                $vacina = Conexao::readSQL("select * from app where codigo =  ".$product["vacina"])[0];
+                $vacina = Conexao::readSQL("select * from vacina where codigo =  ".$product["vacina"])[0];
                 $sale["products"][] = [
                     "quantity" => $product["dose"],
                     "product_id" => $vacina["conta_azul_id"],
