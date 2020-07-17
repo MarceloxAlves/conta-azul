@@ -41,6 +41,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
             'payment' =>
                 array(
                     'type' => 'CASH',
+                    'installments' => array(),
                 ),
             'notes' => '',
             'shipping_cost' => 0,
@@ -56,27 +57,25 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
                     "value" => $product["valorDose"],
                 ];
             }
-
-/*            $receitas = Conexao::readSQL("select * from receitas rc where idExclusao = '$keyIdExclusao' and agente = '$keyIdExclusao' ");
-            if (count($receitas) > 1) {
-                $sale["payment"]["type"] = "TIMES";
-            }
-
             $desconto = 0;
 
-            foreach ($receitas as $parcela => $receita) {
-                $desconto += $receita["desconto"];
-                $total += $receita["valor"];
-                $sale["payment"]["installments"][] = [
-                    "number" => ++$parcela,
-                    "due_date" => dateContaAzul($receita['data_venc']),
-                    "value" => $receita['valor'],
-                ];
-            }*/
+            $receitas = Conexao::readSQL("select * from receitas rc where idExclusao = '$keyIdExclusao' and agente = '$keyIdExclusao' ");
+            if (count($receitas) > 1) {
+                $sale["payment"]["type"] = "TIMES";
+                foreach ($receitas as $parcela => $receita) {
+                    $desconto += $receita["desconto"];
+                    $total += $receita["valor"];
+                    $sale["payment"]["installments"][] = [
+                        "number" => ++$parcela,
+                        "due_date" => dateContaAzul($receita['data_venc']),
+                        "value" => $receita['valor'],
+                    ];
+                }
+            }
 
             $sale["discount"] = [
                 "measure_unit" => "VALUE",
-                "rate" => 0,
+                "rate" => $desconto,
             ];
 
             $sale["shipping_cost"] = $total;
