@@ -60,6 +60,8 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
             $desconto = 0;
 
             $receitas = Conexao::readSQL("select * from receitas rc where idExclusao = '$keyIdExclusao' and agente = '$key' ");
+
+           dd($receitas);
             if (count($receitas) > 1) {
                 $sale["payment"]["type"] = "TIMES";
                 foreach ($receitas as $parcela => $receita) {
