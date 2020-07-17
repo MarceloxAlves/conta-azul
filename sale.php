@@ -24,6 +24,8 @@ if ($_SESSION['access_token'] && isset($_POST['period'])) {
  join paciente pc on app.paciente = pc.codigo
 where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is not null and rc.data_pagto >= '" . $dataIni . "' and rc.data_pagto <= '" . $dataFin . "'");
     $pacienteArray = array();
+
+
     foreach ($applications as $application) {
         $paciente = $application['paciente'];
         $idExclusao = $application['idExclusao'];
@@ -47,6 +49,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
             'shipping_cost' => 0,
         );
         $total = 0;
+        $valid = true;
         foreach ($paciente as $keyIdExclusao => $idExclusao) {
 
             foreach ($idExclusao as $product) {
@@ -65,7 +68,7 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
                 $sale["payment"]["type"] = "TIMES";
                 foreach ($receitas as $parcela => $receita) {
                     $desconto += $receita["desconto"];
-                    $total += $receita["valor"];
+//                    $total += $receita["valor"];
                     $sale["payment"]["installments"][] = [
                         "number" => ++$parcela,
                         "due_date" => dateContaAzul($receita['data_venc']),
@@ -73,21 +76,21 @@ where pc.conta_azul_id is not null and app.paciente != '0' and app.idExclusao is
                     ];
                 }
             } else
-                continue;
+                $valid = false;
 
             $sale["discount"] = [
                 "measure_unit" => "VALUE",
                 "rate" => $desconto,
             ];
 
-            $sale["shipping_cost"] = $total;
+            $sale["shipping_cost"] = $product["valorDose"];
         }
 
         var_dump($sale);
         echo "</br></br>";
 
-
-        $result = $contaAzul->createSale($sale);
+        if ($valid)
+            $result = $contaAzul->createSale($sale);
         var_dump($result);
     }
 }
